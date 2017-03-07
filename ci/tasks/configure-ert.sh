@@ -42,7 +42,7 @@ fi
 function fn_om_linux_curl {
   local curl_method=${1}
   local curl_path=${2}
-  local curl_data=${3}
+  local curl_data=$3
 
   args="--target https://opsman.${pcf_ert_domain} -k \
     --username ${pcf_opsman_admin} \
