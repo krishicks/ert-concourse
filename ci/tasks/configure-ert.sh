@@ -40,23 +40,22 @@ if [[ ! -f ${json_file} ]]; then
 fi
 
 function fn_om_linux_curl {
-  local curl_method=${1}
-  local curl_path=${2}
+  local curl_method=$1
+  local curl_path=$2
   local curl_data=$3
 
-  args="--target https://opsman.${pcf_ert_domain} -k \
-    --username ${pcf_opsman_admin} \
-    --password ${pcf_opsman_admin_passwd}  \
+  args="--target https://opsman.$pcf_ert_domain -k \
+    --username $pcf_opsman_admin \
+    --password $pcf_opsman_admin_passwd  \
     curl \
-    --request ${curl_method} \
-    --path ${curl_path}"
+    --request $curl_method \
+    --path $curl_path"
 
-
-  rm -f /tmp/rqst_stdout.log /tmp/rqst_stderr.log
+  rm -f /tmp/rqst_cmd.log /tmp/rqst_stdout.log /tmp/rqst_stderr.log
 
   set +e
   set -x
-  if [ -n "${curl_data}" ]; then
+  if [ -n "$curl_data" ]; then
     om-linux ${args} --data $curl_data 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
   else
     om-linux ${args} 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
