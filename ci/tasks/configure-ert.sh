@@ -52,7 +52,7 @@ function fn_om_linux_curl {
     --path ${curl_path}"
 
   if [ -n "${curl_data}" ]; then
-    args="${args} --data "${curl_data}""
+    args="${args} --data '${curl_data}'"
   fi
 
   echo "om-linux ${args}" > /tmp/rqst_cmd.log
