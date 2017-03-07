@@ -98,7 +98,7 @@ echo "==========================================================================
 echo "Setting Properties for: ${guid_cf}"
 echo "=============================================================================================="
 
-json_properties=$(cat ${json_file} | jq .properties)
+json_properties=$(cat ${json_file} | jq -c .properties)
 fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" $json_properties
 
 # Set Resource Configs
@@ -114,7 +114,7 @@ for job in ${opsman_avail_jobs}; do
 
  json_job_guid_cmd="echo \${json_job_guids} | jq '.jobs[] | select(.name == \"${job}\") | .guid' | tr -d '\"'"
  json_job_guid=$(eval ${json_job_guid_cmd})
- json_job_config_cmd="echo \${json_jobs_configs} | jq '.[\"${job}\"]' "
+ json_job_config_cmd="echo \${json_jobs_configs} | jq -c '.[\"${job}\"]' "
  json_job_config=$(eval ${json_job_config_cmd})
  echo "---------------------------------------------------------------------------------------------"
  echo "Setting ${json_job_guid} with --data=${json_job_config}..."
