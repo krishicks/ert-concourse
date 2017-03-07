@@ -90,7 +90,7 @@ echo "==========================================================================
 echo "Setting Availability Zones & Networks for: ${guid_cf}"
 echo "=============================================================================================="
 
-json_net_and_az=$(cat ${json_file} | jq .networks_and_azs)
+json_net_and_az="'"$(cat ${json_file} | jq -c .networks_and_azs)"'"
 fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" $json_net_and_az
 
 # Set ERT Properties
@@ -99,7 +99,7 @@ echo "Setting Properties for: ${guid_cf}"
 echo "=============================================================================================="
 
 json_properties=$(cat ${json_file} | jq .properties)
-fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" ${json_properties}
+fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" $json_properties
 
 # Set Resource Configs
 echo "=============================================================================================="
