@@ -52,7 +52,7 @@ function fn_om_linux_curl {
     --path ${curl_path}"
 
   if [ -n "${curl_data}" ]; then
-    args="${args} --data \'${curl_data}\'"
+    args="${args} --data ${curl_data}"
   fi
 
   rm -f /tmp/rqst_cmd.log /tmp/rqst_stdout.log /tmp/rqst_stderr.log
