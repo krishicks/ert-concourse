@@ -39,6 +39,15 @@ if [[ ! -f ${json_file} ]]; then
   exit 1
 fi
 
+function fn_om_linux_curl_fail {
+    echo ERROR
+    echo stdout:\n
+    cat /tmp/rqst_stdout.log >&2
+    echo
+    echo stderr:\n
+    cat /tmp/rqst_stderr.log >&2
+}
+
 function fn_om_linux_curl {
   local curl_method=$1
   local curl_path=$2
@@ -61,21 +70,13 @@ function fn_om_linux_curl {
   fi
 
   if [ $? -ne 0 ]; then
-    echo Failed:
-    echo stdout:
-    cat /tmp/rqst_stdout.log >&2
-    echo stderr:
-    cat /tmp/rqst_stderr.log >&2
+    fn_om_linux_curl_fail
     exit 1
   fi
 
   grep -s -q "Status: 200 OK" /tmp/rqst_stderr.log
   if [ $? -ne 0 ]; then
-    echo Failed:
-    echo stdout:
-    cat /tmp/rqst_stdout.log >&2
-    echo stderr:
-    cat /tmp/rqst_stderr.log >&2
+    fn_om_linux_curl_fail
     exit 1
   fi
 
