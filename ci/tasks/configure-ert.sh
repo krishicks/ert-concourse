@@ -55,7 +55,7 @@ function fn_om_linux_curl {
 
   set +e
   if [ -n "$curl_data" ]; then
-    args="$args --data \"${curl_data// /\\ }"
+    args="$args --data \"${curl_data// /\\ }\""
   fi
 
   om-linux ${args} 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
