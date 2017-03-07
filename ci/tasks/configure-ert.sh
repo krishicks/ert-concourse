@@ -111,7 +111,7 @@ echo "Setting Properties for: ${guid_cf}"
 echo "=============================================================================================="
 
 json_properties=$(cat ${json_file} | jq -c .properties)
-fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" "$json_properties"
+fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" $json_properties
 
 # Set Resource Configs
 echo "=============================================================================================="
