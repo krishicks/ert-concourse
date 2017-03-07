@@ -79,8 +79,8 @@ function fn_om_linux_curl {
     exit 1
   fi
 
-  cat /tmp/rqst_stdout.log
   set -e
+  cat /tmp/rqst_stdout.log
 }
 
 echo "=============================================================================================="
