@@ -91,7 +91,7 @@ echo "Setting Availability Zones & Networks for: ${guid_cf}"
 echo "=============================================================================================="
 
 json_net_and_az=$(cat ${json_file} | jq .networks_and_azs)
-fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" "${json_net_and_az}"
+fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" $json_net_and_az
 
 # Set ERT Properties
 echo "=============================================================================================="
@@ -99,7 +99,7 @@ echo "Setting Properties for: ${guid_cf}"
 echo "=============================================================================================="
 
 json_properties=$(cat ${json_file} | jq .properties)
-fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" "${json_properties}"
+fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/properties" ${json_properties}
 
 # Set Resource Configs
 echo "=============================================================================================="
@@ -118,6 +118,6 @@ for job in ${opsman_avail_jobs}; do
  json_job_config=$(eval ${json_job_config_cmd})
  echo "---------------------------------------------------------------------------------------------"
  echo "Setting ${json_job_guid} with --data=${json_job_config}..."
- fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/jobs/${json_job_guid}/resource_config" "${json_job_config}"
+ fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/jobs/${json_job_guid}/resource_config" ${json_job_config}
 
 done
