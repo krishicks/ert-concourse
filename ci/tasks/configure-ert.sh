@@ -44,9 +44,9 @@ function fn_om_linux_curl {
   local curl_path=${2}
   local curl_data=${3}
 
-  args="--target https://opsman.$pcf_ert_domain -k \
-    --username \"$pcf_opsman_admin\" \
-    --password \"$pcf_opsman_admin_passwd\"  \
+  args="--target https://opsman.${pcf_ert_domain} -k \
+    --username ${pcf_opsman_admin} \
+    --password ${pcf_opsman_admin_passwd}  \
     curl \
     --request ${curl_method} \
     --path ${curl_path}"
