@@ -60,7 +60,9 @@ function fn_om_linux_curl {
   echo "om-linux ${args}" > /tmp/rqst_cmd.log
 
   set +e
-  om-linux "${args}" 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
+  set -x
+  om-linux ${args} 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
+  set +x
   if [ $? -ne 0 ]; then
     echo Failed:
     echo stdout:
