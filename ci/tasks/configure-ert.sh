@@ -64,18 +64,18 @@ function fn_om_linux_curl {
   if [ $? -ne 0 ]; then
     echo Failed:
     echo stdout:
-    cat /tmp/rqst_stdout.log
+    cat /tmp/rqst_stdout.log >&2
     echo stderr:
-    cat /tmp/rqst_stderr.log
+    cat /tmp/rqst_stderr.log >&2
     exit 1
   fi
 
   if [ -s /tmp/rqst_stderr.log ]; then
     echo Failed:
     echo stdout:
-    cat /tmp/rqst_stdout.log
+    cat /tmp/rqst_stdout.log >&2
     echo stderr:
-    cat /tmp/rqst_stderr.log
+    cat /tmp/rqst_stderr.log >&2
     exit 1
   fi
 
