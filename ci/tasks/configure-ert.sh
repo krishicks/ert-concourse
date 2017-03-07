@@ -51,13 +51,21 @@ function fn_om_linux_curl {
     --request ${curl_method} \
     --path ${curl_path}"
 
-  if [ -n ${curl_data} ]; then
-    args="${args} --data '${curl_data}'"
+  if [ -n "${curl_data}" ]; then
+    args="${args} --data "${curl_data}""
   fi
 
   echo "om-linux ${args}" > /tmp/rqst_cmd.log
 
-  om-linux $args > >(tee /tmp/rqst_stdout.log) 2> >(tee /tmp/rqst_stderr.log >&2)
+  set +e
+  om-linux $args > /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
+  if [ $? -ne 0 ]; then
+    cat /tmp/rqst_stderr.log
+    exit 1
+  else
+    cat /tmp/rqst_stdout.log
+  fi
+  set -e
 }
 
 echo "=============================================================================================="
