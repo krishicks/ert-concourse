@@ -71,7 +71,8 @@ function fn_om_linux_curl {
     exit 1
   fi
 
-  if [ -s /tmp/rqst_stderr.log ]; then
+  grep -s -q "Status: 200 OK" /tmp/rqst_stderr.log
+  if [ $? -ne 0 ]; then
     echo Failed:
     echo stdout:
     cat /tmp/rqst_stdout.log >&2
