@@ -56,7 +56,7 @@ function fn_om_linux_curl {
   set +e
   set -x
   if [ -n "$curl_data" ]; then
-    om-linux ${args} --data "'"$curl_data"'" 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
+    om-linux ${args} --data $curl_data 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
   else
     om-linux ${args} 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
   fi
@@ -102,7 +102,7 @@ echo "Setting Availability Zones & Networks for: ${guid_cf}"
 echo "=============================================================================================="
 
 json_net_and_az=$(cat ${json_file} | jq -c .networks_and_azs)
-fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" $json_net_and_az
+fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" "$json_net_and_az"
 
 # Set ERT Properties
 echo "=============================================================================================="
