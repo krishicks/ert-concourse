@@ -100,6 +100,14 @@
           "secret": "{{rds_password}}"
         }
       },
+      ".properties.system_database.external.ccdb_username": {
+        "value": "{{rds_user}}"
+      },
+      ".properties.system_database.external.ccdb_password": {
+        "value": {
+          "secret": "{{rds_password}}"
+        }
+      },
       ".cloud_controller.system_domain": {
         "value": "sys.{{pcf_ert_domain}}"
       },
