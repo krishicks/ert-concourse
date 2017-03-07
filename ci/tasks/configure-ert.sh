@@ -52,7 +52,7 @@ function fn_om_linux_curl {
     --path ${curl_path}"
 
   if [ -n "${curl_data}" ]; then
-    args="${args} --data '${curl_data}'"
+    args="${args} --data ${curl_data}"
   fi
 
   echo "om-linux ${args}" > /tmp/rqst_cmd.log
@@ -91,7 +91,7 @@ echo "Setting Availability Zones & Networks for: ${guid_cf}"
 echo "=============================================================================================="
 
 json_net_and_az=$(cat ${json_file} | jq .networks_and_azs)
-fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" "${json_net_and_az}"
+fn_om_linux_curl "PUT" "/api/v0/staged/products/${guid_cf}/networks_and_azs" "'"${json_net_and_az}"'"
 
 # Set ERT Properties
 echo "=============================================================================================="
