@@ -55,7 +55,7 @@ function fn_om_linux_curl {
     args="${args} --data ${curl_data}"
   fi
 
-  rm /tmp/rqst_cmd.log /tmp/rqst_stdout.log /tmp/rqst_stderr.log
+  rm -f /tmp/rqst_cmd.log /tmp/rqst_stdout.log /tmp/rqst_stderr.log
 
   echo "om-linux ${args}" > /tmp/rqst_cmd.log
 
