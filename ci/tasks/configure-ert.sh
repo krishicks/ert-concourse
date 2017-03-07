@@ -54,13 +54,11 @@ function fn_om_linux_curl {
   rm -f /tmp/rqst_cmd.log /tmp/rqst_stdout.log /tmp/rqst_stderr.log
 
   set +e
-  set -x
   if [ -n "$curl_data" ]; then
     om-linux ${args} --data "${curl_data// /\\ }" 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
   else
     om-linux ${args} 1> /tmp/rqst_stdout.log 2> /tmp/rqst_stderr.log
   fi
-  set +x
 
   if [ $? -ne 0 ]; then
     echo Failed:
